@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var session = require('express-session')
-
+var cors = require('cors');
 var app = express();
 
 app.use(session({
@@ -17,7 +17,20 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
-}))
+}));
+
+var whitelist = ['https://code-name-front-end.herokuapp.com', 'localhost']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.user(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
