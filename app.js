@@ -30,7 +30,7 @@ var corsOptions = {
   }
 }
 
-app.user(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
