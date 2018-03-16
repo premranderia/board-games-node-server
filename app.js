@@ -19,7 +19,7 @@ app.use(session({
   cookie: { secure: false },
 }));
 
-var whitelist = ['https://code-name-front-end.herokuapp.com', 'localhost']
+var whitelist = ['https://code-name-game.herokuapp.com', 'http://localhost:4200']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
