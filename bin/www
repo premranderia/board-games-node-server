@@ -9,6 +9,7 @@ var debug = require('debug')('myapp:server');
 var http = require('http');
 const path = require('path');
 const _ = require('lodash');
+var socketApp = require('../socket-app');
 /**
  * Get port from environment and store in Express.
  */
@@ -21,7 +22,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+new socketApp({ server, port });
 /**
  * Listen on provided port, on all network interfaces.
  */

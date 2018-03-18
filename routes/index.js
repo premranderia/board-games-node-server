@@ -4,9 +4,8 @@ const codeName = require('public/javascripts/CodeName.controller.js');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
- 
+  res.sendFile(__dirname + '/index.html');
 });
-
 
 router.post('/api/code-name', (req, res, next) => {
   const body = req.body;
@@ -15,7 +14,6 @@ router.post('/api/code-name', (req, res, next) => {
     req.session.data[id] = 0;
   }
   codeName.storeData({ data: body.data, id }).then((data) => {
-    console.log('Response time baby !!');
     res.send({
       sucess: true,
       data
@@ -25,12 +23,10 @@ router.post('/api/code-name', (req, res, next) => {
 
 router.get('/api/code-name/:id', (req, res, next) => {
   const id = Number(req.params.id);
-  console.log('req.session.spyViewCount', req.sessionID, req.session.data);
   codeName.getGameById({ id }).then((data) => {
     // Update spy view count to be greater than
     if (data['spyViewCount'] !== undefined) {
       data['spyViewCount'] = data['spyViewCount'] + 1;
-      console.log(`data['spyViewCount']`);
       if (data['spyViewCount'] === 1) {
         req.session.data = {
           [id]: data['spyViewCount']

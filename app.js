@@ -22,6 +22,7 @@ app.use(session({
 var whitelist = ['https://code-name-game.herokuapp.com', 'http://localhost:4200']
 var corsOptions = {
   origin: function (origin, callback) {
+    // callback(null, true)
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
@@ -65,5 +66,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
