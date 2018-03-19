@@ -7,9 +7,6 @@ class SocketServer {
     this.io = socketIo(this.server);
     this.listen();
   }
-  createServer() {
-    this.server = server;
-  }
 
   listen() {
     this.server.listen(this.port, () => {
