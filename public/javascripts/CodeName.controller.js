@@ -4,6 +4,10 @@ const filePath = 'data/saved-data.json';
 
 class CodeName {
 
+  deleteData() {
+    return this.saveToJson({});
+  }
+
   getGameById({ id }) {
     return new Promise((res, rej) => {
       this.readFromJson().then((data) => {

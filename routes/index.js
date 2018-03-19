@@ -10,9 +10,6 @@ router.get('/', function (req, res, next) {
 router.post('/api/code-name', (req, res, next) => {
   const body = req.body;
   const id = Number(body.id);
-  if (req.session.data && req.session.data[id]) {
-    req.session.data[id] = 0;
-  }
   codeName.storeData({ data: body.data, id }).then((data) => {
     res.send({
       sucess: true,
@@ -24,24 +21,25 @@ router.post('/api/code-name', (req, res, next) => {
 router.get('/api/code-name/:id', (req, res, next) => {
   const id = Number(req.params.id);
   codeName.getGameById({ id }).then((data) => {
-    // Update spy view count to be greater than
-    if (data['spyViewCount'] !== undefined) {
-      data['spyViewCount'] = data['spyViewCount'] + 1;
-      if (data['spyViewCount'] === 1) {
-        req.session.data = {
-          [id]: data['spyViewCount']
-        };
-      }
-      codeName.storeData({ data, id });
-    }
-
-    if (req.session.data && req.session.data[id] === 1) {
-      data['spyViewCount'] = 1;
-    }
     res.send(data);
   }, () => {
     res.send({});
   });
 });
 
+router.delete('/api/code-name', (req, res, next) => {
+  console.log('deleitng');
+  codeName.deleteData().then(() => {
+    res.send({
+      sucess: true,
+      message: 'All Data deleted'
+    })
+  }, () => {
+    res.send({
+      sucess: false,
+      message: 'Error deleting data'
+    });
+  });
+});
 module.exports = router;
+
