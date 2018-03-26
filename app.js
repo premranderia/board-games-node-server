@@ -19,6 +19,9 @@ app.use(session({
   cookie: { secure: false },
 }));
 
+app.set('etag', false);
+app.disable('etag');
+
 var whitelist = ['https://code-name-game.herokuapp.com', 'http://localhost:4200', 'https://code-name-node-server.herokuapp.com']
 var corsOptions = {
   origin: function (origin, callback) {
