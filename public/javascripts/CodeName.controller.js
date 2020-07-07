@@ -3,7 +3,6 @@ const jsonfile = require('jsonfile');
 const filePath = 'data/saved-data.json';
 
 class CodeName {
-
   deleteData() {
     return this.saveToJson({});
   }
@@ -13,6 +12,17 @@ class CodeName {
       this.readFromJson().then((data) => {
         if (data && data[id]) {
           res(data[id]);
+        }
+        rej();
+      });
+    });
+  }
+
+  getAllGames() {
+    return new Promise((res, rej) => {
+      this.readFromJson().then((data) => {
+        if (data) {
+          res(data);
         }
         rej();
       });
@@ -57,7 +67,6 @@ class CodeName {
         }
       });
     });
-
   }
 }
 
