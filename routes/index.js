@@ -13,33 +13,49 @@ router.post('/api/code-name', (req, res, next) => {
   codeName.storeData({ data: body.data, id }).then((data) => {
     res.send({
       sucess: true,
-      data
+      data,
     });
   });
 });
 
 router.get('/api/code-name/:id', (req, res, next) => {
   const id = Number(req.params.id);
-  codeName.getGameById({ id }).then((data) => {
-    res.send(data);
-  }, () => {
-    res.send({});
-  });
+  codeName.getGameById({ id }).then(
+    (data) => {
+      res.send(data);
+    },
+    () => {
+      res.send({});
+    }
+  );
+});
+
+router.get('/api/code-name', (req, res, next) => {
+  codeName.getAllGames().then(
+    (data) => {
+      res.send(data);
+    },
+    () => {
+      res.send({});
+    }
+  );
 });
 
 router.delete('/api/code-name', (req, res, next) => {
   console.log('deleitng');
-  codeName.deleteData().then(() => {
-    res.send({
-      sucess: true,
-      message: 'All Data deleted'
-    })
-  }, () => {
-    res.send({
-      sucess: false,
-      message: 'Error deleting data'
-    });
-  });
+  codeName.deleteData().then(
+    () => {
+      res.send({
+        sucess: true,
+        message: 'All Data deleted',
+      });
+    },
+    () => {
+      res.send({
+        sucess: false,
+        message: 'Error deleting data',
+      });
+    }
+  );
 });
 module.exports = router;
-
