@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const codeName = require('public/javascripts/CodeName.controller.js');
-const LinkeeGame = require('public/javascripts/Linkee.controller.js');
+const codeName = require('public/javascripts/CodeName.controller');
+const LinkeeGame = require('public/javascripts/Linkee.controller');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -42,7 +42,7 @@ router.get('/api/linkee-game/:id', (req, res, next) => {
   );
 });
 
-router.get('/api/linkee-game/questions', (req, res, next) => {
+router.get('/api/linkeegame/questions', (req, res, next) => {
   LinkeeGame.getQuestions().then(
     (data) => {
       res.send(data);
@@ -77,7 +77,6 @@ router.get('/api/code-name', (req, res, next) => {
 });
 
 router.delete('/api/code-name', (req, res, next) => {
-  console.log('deleitng');
   codeName.deleteData().then(
     () => {
       res.send({

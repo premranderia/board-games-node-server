@@ -1,7 +1,7 @@
 const fs = require('fs');
 const jsonfile = require('jsonfile');
 const linkeGameData = 'data/linkee-data.json';
-const linkeGameQuestions = 'data/linkee-questions.json';
+const linkeGameQuestions = 'public/javascripts/linkee-questions.json';
 
 class Linkee {
   deleteData() {
@@ -21,7 +21,7 @@ class Linkee {
 
   getQuestions() {
     return new Promise((res, rej) => {
-      this.readLinkeeQuestions().then((data) => {
+      this.readLinkeeQuestions().then(({ data }) => {
         if (data) {
           res(data);
         }
