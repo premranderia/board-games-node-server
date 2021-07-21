@@ -1,15 +1,16 @@
 const fs = require('fs');
 const jsonfile = require('jsonfile');
-const filePath = 'data/saved-data.json';
+const linkeGameData = 'data/linkee-data.json';
+const linkeGameQuestions = 'public/javascripts/linkee-questions.json';
 
-class CodeName {
+class Linkee {
   deleteData() {
     return this.saveToJson({});
   }
 
   getGameById({ id }) {
     return new Promise((res, rej) => {
-      this.readFromJson().then((data) => {
+      this.readLinkeeGame().then((data) => {
         if (data && data[id]) {
           res(data[id]);
         }
@@ -18,9 +19,20 @@ class CodeName {
     });
   }
 
+  getQuestions() {
+    return new Promise((res, rej) => {
+      this.readLinkeeQuestions().then(({ data }) => {
+        if (data) {
+          res(data);
+        }
+        rej();
+      });
+    });
+  }
+
   getAllGames() {
     return new Promise((res, rej) => {
-      this.readFromJson().then((data) => {
+      this.readLinkeeGame().then((data) => {
         if (data) {
           res(data);
         }
@@ -31,7 +43,7 @@ class CodeName {
 
   storeData({ id, data }) {
     return new Promise((res, rej) => {
-      this.readFromJson().then((obj) => {
+      this.readLinkeeGame().then((obj) => {
         if (obj) {
           obj[id] = data;
           this.saveToJson(obj).then((err) => {
@@ -47,7 +59,7 @@ class CodeName {
 
   saveToJson(obj) {
     return new Promise((res, rej) => {
-      fs.writeFile(filePath, JSON.stringify(obj), (err, data) => {
+      fs.writeFile(linkeGameData, JSON.stringify(obj), (err, data) => {
         if (err) {
           rej(err);
         } else {
@@ -57,9 +69,21 @@ class CodeName {
     });
   }
 
-  readFromJson() {
+  readLinkeeGame() {
     return new Promise((res, rej) => {
-      jsonfile.readFile(filePath, function readFileCallback(err, data) {
+      jsonfile.readFile(linkeGameData, function readFileCallback(err, data) {
+        if (err) {
+          rej(err);
+        } else {
+          res(data);
+        }
+      });
+    });
+  }
+
+  readLinkeeQuestions() {
+    return new Promise((res, rej) => {
+      jsonfile.readFile(linkeGameQuestions, function readFileCallback(err, data) {
         if (err) {
           rej(err);
         } else {
@@ -70,4 +94,4 @@ class CodeName {
   }
 }
 
-module.exports = new CodeName();
+module.exports = new Linkee();

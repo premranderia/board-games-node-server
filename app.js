@@ -8,21 +8,27 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
-var session = require('express-session')
+var session = require('express-session');
 var cors = require('cors');
 var app = express();
 
-app.use(session({
-  secret: 'host-party',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false },
-}));
+app.use(
+  session({
+    secret: 'host-party',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 app.set('etag', false);
 app.disable('etag');
 
-var whitelist = ['https://code-name-game.herokuapp.com', 'http://localhost:4200', 'https://code-name-node-server.herokuapp.com']
+var whitelist = [
+  'https://code-name-game.herokuapp.com',
+  'http://localhost:4200',
+  'https://code-name-node-server.herokuapp.com',
+];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -30,8 +36,8 @@ var corsOptions = {
     } else {
       callback(null, true);
     }
-  }
-}
+  },
+};
 
 app.use(cors(corsOptions));
 
@@ -53,6 +59,7 @@ app.use('/users', users);
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
+  console.log(err);
   next(err);
 });
 
@@ -68,6 +75,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
