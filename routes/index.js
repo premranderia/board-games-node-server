@@ -93,7 +93,7 @@ router.delete('/api/code-name', (req, res, next) => {
   );
 });
 
-router.get('San_Francisco', (req, res, next) => {
+router.get('/api/San_Francisco', (req, res, next) => {
   res.send({
     coord: { lon: -62.08, lat: -31.43 },
     sys: { message: 0.3897, country: 'AR', sunrise: 1428575101, sunset: 1428616476 },
@@ -117,7 +117,7 @@ router.get('San_Francisco', (req, res, next) => {
   });
 });
 
-router.get('Miami', (req, res, next) => {
+router.get('/api/Miami', (req, res, next) => {
   res.send({
     coord: { lon: -80.19, lat: 25.77 },
     sys: { message: 0.0283, country: 'US', sunrise: 1428577391, sunset: 1428622877 },
@@ -141,7 +141,7 @@ router.get('Miami', (req, res, next) => {
   });
 });
 
-router.get('New_York_City', (req, res, next) => {
+router.get('/api/New_York_City', (req, res, next) => {
   res.send({
     coord: { lon: -74.01, lat: 40.71 },
     sys: { message: 0.4108, country: 'United States of America', sunrise: 1428575146, sunset: 1428622154 },
@@ -165,7 +165,7 @@ router.get('New_York_City', (req, res, next) => {
   });
 });
 
-router.get('Chicago', (req, res, next) => {
+router.get('/api/Chicago', (req, res, next) => {
   res.send({
     coord: { lon: -87.65, lat: 41.85 },
     sys: { message: 0.014, country: 'US', sunrise: 1428578344, sunset: 1428625502 },
@@ -190,7 +190,7 @@ router.get('Chicago', (req, res, next) => {
   });
 });
 
-router.get('Chicago', (req, res, next) => {
+router.get('/api/New_Orleans', (req, res, next) => {
   res.send({
     coord: { lon: -90.08, lat: 29.95 },
     sys: { message: 0.0108, country: 'US', sunrise: 1428579574, sunset: 1428625436 },
