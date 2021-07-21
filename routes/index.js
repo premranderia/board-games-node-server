@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const codeName = require('public/javascripts/CodeName.controller');
 const LinkeeGame = require('public/javascripts/Linkee.controller');
+var path = require('path');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -212,5 +213,12 @@ router.get('/api/New_Orleans', (req, res, next) => {
     name: 'New Orleans',
     cod: 200,
   });
+});
+
+router.get('/api/mock-image', (req, res, next) => {
+  console.log(__dirname);
+  const filePath = path.join(__dirname, '../public/images/weather.png');
+  console.log(filePath);
+  res.sendFile(filePath);
 });
 module.exports = router;
